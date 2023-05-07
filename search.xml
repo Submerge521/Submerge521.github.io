@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>大数据学习-bug04</title>
+      <link href="//2023/04/23/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0-bug04/"/>
+      <url>//2023/04/23/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0-bug04/</url>
+      
+        <content type="html"><![CDATA[<h1 id="项目场景："><a href="#项目场景：" class="headerlink" title="项目场景："></a>项目场景：</h1><p>在进行连接远程终端时发现无法连接，虚拟机网卡无IP地址</p><hr><h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在进行连接远程终端时发现无法连接，检查后发现虚拟机网卡ens33无IP地址，重启网卡也无法解决该问题，并且使用nmcli命令界面化激活网卡失败。</p><p>报错如下：</p><blockquote><p>Could not activate connection: Connection ‘ens33’ is not available on the device ens33 at this time.</p></blockquote><p><img src="https://pic-bed-2gt.pages.dev/img/50.png" alt=""></p><p><img src="https://pic-bed-2gt.pages.dev/img/51.png" alt="">  </p><h1 id="原因分析："><a href="#原因分析：" class="headerlink" title="原因分析："></a>原因分析：</h1><p>这个错误提示通常表示网络接口”ens33”当前不可用。可能的原因包括：</p><ol><li>网络接口未启动，或者已被禁用。</li><li>网络接线未正确连接到设备，或者存在硬件故障。</li><li>操作系统或网络配置存在问题，导致网络接口无法正常工作。</li><li>虚拟机配置错误，例如虚拟机与主机系统之间的网络设置不正确。</li></ol><p>NetworkManager网络管理器未激活</p><hr><h1 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h1><ol><li><p>检查网络接口是否已启动。可以使用命令<code>ip link show ens33</code>检查状态是否为”UP”。如果未启动，可以使用命令<code>sudo ip link set ens33 up</code>启动它。</p></li><li><p>检查网络接线是否正确连接到设备，并且不存在硬件故障。</p></li><li><p>检查操作系统或网络配置是否正确。可以尝试重置网络配置，或者重新安装网络驱动程序等措施来解决问题。</p></li><li><p>如果正在运行虚拟机，请确保虚拟机与主机系统之间的网络设置正确配置。可以尝试更改虚拟机网络模式，或者重新安装虚拟机软件来解决问题。</p></li></ol><p>如果上述操作还未能解决，就需要考虑是networkmanager的问题</p><p>使用命令</p><blockquote><p>nmcli networking</p></blockquote><p> 检查当前networkmanager是否处于激活状态，如果是disable证明未被启用，则需使用如下命令启用networkmanager托管</p><blockquote><p>nmcli networking on</p><p>nmcli networking</p></blockquote><p>之后重启networknmanager服务</p><blockquote><p>systemctl restart NetworkManager </p></blockquote><p>开启之后重新查询ip，发现已经恢复了 </p><p><img src="https://pic-bed-2gt.pages.dev/img/52.png" alt=""></p><p> 尝试连接xshell远程终端，成功！</p><p><img src="https://pic-bed-2gt.pages.dev/img/53.png" alt=""></p><p>大数据学习萌新，如遇到问题，欢迎指正！</p><p>求三连呐！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> bug解决 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 标签2 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hadoop完全分布式搭建</title>
       <link href="//2023/04/23/Hadoop%E6%90%AD%E5%BB%BA/"/>
       <url>//2023/04/23/Hadoop%E6%90%AD%E5%BB%BA/</url>
